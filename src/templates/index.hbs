@@ -33,32 +33,36 @@
   			</div>
   			<div class="f-filter__content">
   				<div class="grid">
-  					<div class="part">
+  					<div class="part left-col">
   						<h3 class="title">Ваши друзья</h3>
   						<ul class="list">
-  							<li class="list__item">
-  								<div class="user">
-  									<div class="avatar">
-  										<div class="avatar__inner"></div>
-  									</div>
-  									<p class="user__name">Иришка Кочерыжка</p>
-  									<i class="ico i-close"></i>
-  								</div>
-  							</li>
+							  {{#each users}}
+							    <li class="list__item" >
+									<div class="user" data-user-id="{{id}}" draggable="true">
+										<div class="avatar">
+											<div class="avatar__inner"></div>
+										</div>
+										<p class="user__name">{{name}}</p>
+										<i class="ico i-close add-user"></i>
+									</div>
+  								</li>
+							  {{/each}}
   						</ul>
   					</div>
-  					<div class="part">
+  					<div class="part right-col">
   						<h3 class="title">Друзья в списке</h3>
   						<ul class="list">
+							{{#each usersAdd}}
   							<li class="list__item">
-  								<div class="user">
+  								<div class="user" data-user-id="{{id}}" draggable="true">
   									<div class="avatar">
   										<div class="avatar__inner"></div>
   									</div>
-  									<p class="user__name">Иришка Кочерыжка</p>
-  									<i class="ico i-close"></i>
+  									<p class="user__name">{{name}}</p>
+  									<i class="ico i-close remove-user"></i>
   								</div>
   							</li>
+							{{/each}}
   						</ul>
   					</div>
   				</div>
