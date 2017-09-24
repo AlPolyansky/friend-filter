@@ -134,6 +134,28 @@ body{
     }
 }
 
+.i-search{
+    width: 14px;
+    height: 14px;
+    color: #9f9f9f;
+    border: 3px solid;
+    border-radius: 50%;
+    position: relative;
+    &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 3px;
+        height: 7px;
+        background-color: currentColor;
+        bottom: 0;
+        right: 0;
+        margin-bottom: -6px;
+        margin-right: -4px;
+        transform: rotate(-45deg);
+    }
+}
+
 .f-filter{
     display: inline-block;
     max-width: 620px;
@@ -184,13 +206,29 @@ body{
     background-color: #fff;
     overflow: hidden;
     border-radius: 10px;
+    position: relative;
+    .ico{
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        left: 8px;
+        transform: translateY(-50%);
+    }
     &__input{
         @extend %reset;
         background-color: transparent;
         width: 100%;
         padding: 6px 15px;
+        position: relative;
+        z-index: 2;
         &::placeholder{
             color: #bbb;
+        }
+    }
+
+    &--ico{
+        .field__input{
+            padding-left: 35px;
         }
     }
 }
