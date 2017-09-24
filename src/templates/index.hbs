@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{htmlWebpackPlugin.options.title}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+</head>
+<body>
+  <div id="root">
+  	<div class="container">
+  		<div class="logo">
+				<img src="img/logo.png" alt="">
+  		</div>
+  		<div class="f-filter">
+  			<div class="f-filter__top">
+  				<h2 class="title">Выберите друзей</h2>
+  				<i class="ico i-close"></i>
+  			</div>
+  			<div class="f-filter__search">
+  				<div class="grid">
+  					<div class="part">
+  						<div class="field">
+  							<input type="text" class='field__input' placeholder="{{templateContent.filterPlaceholderLeft}}">
+  						</div>
+  					</div>
+  					<div class="part">
+  						<div class="field">
+  							<input type="text" class='field__input' placeholder="{{templateContent.filterPlaceholderRight}}">
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</body>
+</html>
