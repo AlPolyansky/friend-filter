@@ -17,26 +17,19 @@
     word-wrap: break-word;
 }
 
-
-%grid{
+%grid {
     display: table;
     table-layout: fixed;
     width: 100%;
 }
 
-%part{
+%part {
     display: table-cell;
     vertical-align: middle;
 }
 
-
-
-
 $container: 100%;
 $gutter: 10px;
-
-
-
 //====== base style ======
 *,
 *:after,
@@ -55,7 +48,7 @@ html {
     color: #000;
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
     user-select: none;
 }
@@ -80,42 +73,37 @@ body{
     background-color: #5EC2B7;
 }
 
-
-
-.container{
+.container {
     text-align: center;
     padding-top: 80px;
     padding-bottom: 80px;
 }
 
-
-
-.logo{
+.logo {
     text-align: center;
     margin-bottom: 40px;
-    img{
+    img {
         display: inline-block;
     }
 }
 
-
-.title{
+.title {
     @extend %reset;
 }
 
-
-.ico{
+.ico {
     display: inline-block;
     vertical-align: middle;
 }
 
-.i-close{
+.i-close {
     position: relative;
     width: 20px;
     height: 20px;
     cursor: pointer;
     color: inherit;
-    &:before,&:after{
+    &:before,
+    &:after {
         content: '';
         display: block;
         position: absolute;
@@ -128,22 +116,21 @@ body{
         transform-origin: top left;
         top: 50%;
         left: 50%;
-        transform: rotate(45deg) translate(-50%,-50%);
-        
+        transform: rotate(45deg) translate(-50%, -50%);
     }
-    &:after{
-        transform: rotate(-45deg) translate(-50%,-50%);
+    &:after {
+        transform: rotate(-45deg) translate(-50%, -50%);
     }
 }
 
-.i-search{
+.i-search {
     width: 14px;
     height: 14px;
     color: #9f9f9f;
     border: 3px solid;
     border-radius: 50%;
     position: relative;
-    &:before{
+    &:before {
         content: '';
         display: block;
         position: absolute;
@@ -158,7 +145,7 @@ body{
     }
 }
 
-.f-filter{
+.f-filter {
     display: inline-block;
     max-width: 620px;
     width: 100%;
@@ -166,180 +153,156 @@ body{
     background-color: #fff;
     border-radius: 20px;
     overflow: hidden;
-    &__top{
+    &__top {
         color: #fff;
         background-color: #ff8663;
         padding-left: 20px;
         padding-top: 15px;
         padding-bottom: 15px;
         position: relative;
-        .ico{
+        .ico {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             right: 20px;
         }
     }
-
-    &__search{
+    &__search {
         background-color: #f0f0f0;
     }
-
-    &__content{
-        
-        .grid{
+    &__content {
+        .grid {
             border-collapse: collapse;
             height: 0;
             min-height: 350px;
         }
-
-        .part{
+        .part {
             vertical-align: top;
-            &:first-of-type{
+            &:first-of-type {
                 border-right: 1px solid #f0f0f0;
                 padding-left: 10px;
                 padding-right: 20px;
-                .i-close{
-                    &:before{
-                        transform: rotate(0deg) translate(-50%,-50%);
+                .i-close {
+                    &:before {
+                        transform: rotate(0deg) translate(-50%, -50%);
                     }
-                    &:after{
-                        transform: rotate(90deg) translate(-50%,-50%);
+                    &:after {
+                        transform: rotate(90deg) translate(-50%, -50%);
                     }
                 }
             }
-            &:last-of-type{
+            &:last-of-type {
                 border-left: 1px solid #f0f0f0;
                 padding-right: 10px;
                 padding-left: 20px;
             }
         }
-
-        .title{
+        .title {
             font-size: 12px;
             padding-top: 3px;
             padding-bottom: 5px;
             border-bottom: 1px solid #f0f0f0;
         }
     }
-
-    &__bottom{
+    &__bottom {
         padding: 8px;
         background-color: #f0f0f0;
         text-align: right;
     }
 }
 
-
-
-
-
-.grid{
+.grid {
     @extend %grid;
-    .part{
+    .part {
         padding: 10px 12px;
     }
 }
 
-.part{
+.part {
     @extend %part;
 }
 
-
-.field{
+.field {
     @extend %reset;
     background-color: #fff;
     overflow: hidden;
     border-radius: 10px;
     position: relative;
-    .ico{
+    .ico {
         position: absolute;
         top: 50%;
         margin-top: -3px;
         left: 8px;
         transform: translateY(-50%);
     }
-    &__input{
+    &__input {
         @extend %reset;
         background-color: transparent;
         width: 100%;
         padding: 6px 15px;
         position: relative;
         z-index: 2;
-        &::placeholder{
+        &::placeholder {
             color: #bbb;
         }
     }
-
-    &--ico{
-        .field__input{
+    &--ico {
+        .field__input {
             padding-left: 35px;
         }
     }
 }
 
-
-
-
-
-
-
-
-
 //=========== Общие настройки =============//
-$button--font-size: 12px;                                                // Размер шрифта
-$button--fw: 400;                                                                // Плотность шрифта
-$button--border-radius: 10px;                                        // Скругление углов
-$button--color: #fff;                                                        // Цвет текста
-$button--bg: #ff8663;                                                                // Основной цвет
-$button--gradient: none;                                                // градиент
-$button--padding: 7px 3px;                                            // padding
-$button--shadow: none;                                                    // Тень
-$button--text-style:    none;                                            // Начертание теста
-$button--border:    none;                                                    // Border
-$button--text-shadow: none;                                            // Тень текста
-$button--transition : all .2s;                                    // transition
+$button--font-size: 12px; // Размер шрифта
+$button--fw: 400; // Плотность шрифта
+$button--border-radius: 10px; // Скругление углов
+$button--color: #fff; // Цвет текста
+$button--bg: #ff8663; // Основной цвет
+$button--gradient: none; // градиент
+$button--padding: 7px 3px; // padding
+$button--shadow: none; // Тень
+$button--text-style: none; // Начертание теста
+$button--border: none; // Border
+$button--text-shadow: none; // Тень текста
+$button--transition: all .2s; // transition
 //=========== Общие настройки =============//
-
-
-.list{
+.list {
     @extend %reset;
-    &__item{
+    &__item {
         @extend %reset;
         border-bottom: 1px solid #f0f0f0;
     }
 }
 
-
-.avatar{
+.avatar {
     overflow: hidden;
     border-radius: 50%;
     display: inline-block;
-    &__inner{
-        background-color: red;
+    &__inner {
+        background-size: cover;
         width: 46px;
         height: 46px;
     }
 }
 
-
-.user{
+.user {
     padding: 8px 6px;
     color: #4f4f4f;
     position: relative;
     padding-right: 50px;
-    .avatar{
+    .avatar {
         vertical-align: middle;
         margin-right: 5px;
     }
-    &__name{
+    &__name {
         @extend %reset;
         display: inline-block;
         vertical-align: middle;
         font-size: 12px;
         font-weight: 500;
     }
-    .ico{
+    .ico {
         position: absolute;
         color: #c4c4c4;
         top: 50%;
@@ -348,41 +311,40 @@ $button--transition : all .2s;                                    // transition
     }
 }
 
-
-.button{
+.button {
     width: 100%;
     max-width: 90px;
     display: inline-block;
     font-size: $button--font-size;
     color: $button--color;
     background: $button--bg;
-    @if($button--gradient != none){
+    @if($button--gradient !=none) {
         background: $button--gradient;
     }
-    @if($button--border != none){
+    @if($button--border !=none) {
         border: $button--border;
     }
     border-radius: $button--border-radius;
     font-weight: $button--fw;
-    @if($button--text-shadow != none){
+    @if($button--text-shadow !=none) {
         text-shadow: $button--text-shadow;
     }
-    @if($button--transition != none){
+    @if($button--transition !=none) {
         transition: $button--transition;
     }
-    @if($button--shadow != none){
+    @if($button--shadow !=none) {
         box-shadow: $button--shadow;
     }
     clear: both;
     position: relative;
     text-transform: $button--text-style;
-    &:hover{
-        background-color: darken(#ff8663,10%);
+    &:hover {
+        background-color: darken(#ff8663, 10%);
     }
-    &:active{
-        background-color: darken(#ff8663,20%);
+    &:active {
+        background-color: darken(#ff8663, 20%);
     }
-    &__text{
+    &__text {
         width: 100%;
         display: block;
         text-align: center;

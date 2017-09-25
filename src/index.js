@@ -1,5 +1,6 @@
 import './sass/main.scss';
 import template from './templates/index.hbs';
+import usersTemplate from './templates/allFriend.hbs';
 import base from '../webpack/_base.js';
 import listener from './js/listener.js';
 import checkParentData from './js/checkParentData.js';
@@ -12,6 +13,16 @@ const root = document.querySelector('#root');
 function render(value) {
     root.innerHTML = template(value);
 };
+
+function isMatching(full, chunk) {
+    full = '' + full;
+    chunk = '' + chunk;
+
+    let a = '' + full.toLowerCase();
+    let b = '' + chunk.toLowerCase();
+
+    return a.indexOf(b) < 0 ? false : true;
+}
 
 
 function offset(elt) {
@@ -30,22 +41,11 @@ let _data = {
         filterPlaceholderLeft: 'Начните вводить имя друга',
         filterPlaceholderRight: 'Название',
     },
-    users: [{
-            name: 'Виктор',
-            id: 0
-        },
-        {
-            name: 'Павел',
-            id: 1
-        },
-        {
-            name: 'Гриша',
-            id: 2
-        }
-    ],
+    users: [],
     usersAdd: [
 
-    ]
+    ],
+    leftFilterValue: ''
 }
 
 
@@ -65,6 +65,47 @@ function changeList(userId, action) {
 }
 
 
+
+function api(method, params) {
+    return new Promise((resolve, reject) => {
+        VK.api(method, params, data => {
+            if (data.error) {
+                reject(new Error(data.error.error_msg))
+            } else {
+                resolve(data.response);
+            }
+        });
+    });
+};
+
+const promise = new Promise((resolve, reject) => {
+    VK.init({
+        apiId: 5267932
+    });
+    VK.Auth.login(function(response) {
+        if (response.session) {
+            resolve(response);
+        } else {
+            reject(new Error('Не удалось авторизоваться '));
+        }
+    }, 8);
+});
+
+promise
+    .then(() => {
+        return api('users.get', { v: 5.68, name_case: 'gen' });
+    })
+    .then(data => {
+
+
+        return api('friends.get', { v: 5.68, fields: 'first_name, last_name, photo_100' })
+    })
+    .then(data => {
+        _data.users = data.items;
+        render(_data);
+    })
+
+
 // Слушатель клика
 listener('click', e => {
     let userElementData = checkParentData(e);
@@ -75,9 +116,8 @@ listener('click', e => {
 
 
 // Слушатель перетаскивания
-// listener('dragend', e => {
-//     console.log(e.dataTransfer);
-// })
+
+
 
 listener('dragend', e => {
     let userElementData = checkParentData(e);
@@ -91,5 +131,20 @@ listener('dragend', e => {
 })
 
 
+// Слушатель фильтра
 
-render(_data);
+listener('keyup', e => {
+
+    if (e.target.classList.contains('field__input')) {
+        _data.leftFilterValue = e.target.value;
+        let users;
+        users = _data.users.filter(user => {
+            let fullName = user.first_name + ' ' + user.last_name;
+
+            return isMatching(fullName, e.target.value);
+        });
+        document.querySelector('.left-col .list').innerHTML = usersTemplate({
+            users
+        });
+    }
+});

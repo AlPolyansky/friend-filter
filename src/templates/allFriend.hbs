@@ -1,0 +1,11 @@
+{{#each users}}
+<li class="list__item" >
+    <div class="user" data-user-id="{{id}}" draggable="true">
+        <div class="avatar">
+            <div class="avatar__inner" style='background-image: url({{photo_100}})'></div>
+        </div>
+        <p class="user__name">{{first_name}} {{last_name}}</p>
+        <i class="ico i-close add-user"></i>
+    </div>
+</li>
+{{/each}}
