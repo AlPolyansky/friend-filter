@@ -10,6 +10,9 @@ const images = base.importAll(require.context('./img', false, /\.(png|jpe?g|svg)
 const root = document.querySelector('#root');
 
 
+
+
+
 function render(value) {
     root.innerHTML = template(value);
 };
@@ -45,7 +48,8 @@ let _data = {
     usersAdd: [
 
     ],
-    leftFilterValue: ''
+    leftFilterValue: '',
+    rightFilterValue: '',
 }
 
 
@@ -55,13 +59,18 @@ function changeList(userId, action) {
 
     _data[listFirst] = _data[listFirst].filter(user => {
         if (user.id == userId) {
-            _data[listSecond].push(user);
+            _data[listSecond].unshift(user);
             return false;
         } else {
             return true;
         }
     });
     render(_data);
+}
+
+
+function setCookie(cookieName, cookieVal) {
+    document.cookie = `${cookieName}=${cookieVal}`;
 }
 
 
@@ -101,7 +110,14 @@ promise
         return api('friends.get', { v: 5.68, fields: 'first_name, last_name, photo_100' })
     })
     .then(data => {
-        _data.users = data.items;
+        let local = localStorage.getItem('vk-filter');
+        if (local) {
+            let parse = JSON.parse(local);
+            _data.users = parse.users;
+            _data.usersAdd = parse.usersAdd;
+        } else {
+            _data.users = data.items;
+        }
         render(_data);
     })
 
@@ -112,6 +128,12 @@ listener('click', e => {
     if (userElementData.id) {
         changeList(userElementData.id, userElementData.action);
     };
+
+    if (e.target.classList.contains('button--save')) {
+        let json = JSON.stringify(_data);
+
+        localStorage.setItem('vk-filter', json);
+    }
 });
 
 
@@ -136,15 +158,30 @@ listener('dragend', e => {
 listener('keyup', e => {
 
     if (e.target.classList.contains('field__input')) {
-        _data.leftFilterValue = e.target.value;
-        let users;
-        users = _data.users.filter(user => {
-            let fullName = user.first_name + ' ' + user.last_name;
+        if (e.target.classList.contains('filter-all-users')) {
+            _data.leftFilterValue = e.target.value;
+            let users;
+            users = _data.users.filter(user => {
+                let fullName = user.first_name + ' ' + user.last_name;
 
-            return isMatching(fullName, e.target.value);
-        });
-        document.querySelector('.left-col .list').innerHTML = usersTemplate({
-            users
-        });
+                return isMatching(fullName, e.target.value);
+            });
+            document.querySelector('.left-col .list').innerHTML = usersTemplate({
+                users
+            });
+        }
+
+        if (e.target.classList.contains('filter-add-users')) {
+            _data.rightFilterValue = e.target.value;
+            let users;
+            users = _data.usersAdd.filter(user => {
+                let fullName = user.first_name + ' ' + user.last_name;
+
+                return isMatching(fullName, e.target.value);
+            });
+            document.querySelector('.right-col .list').innerHTML = usersTemplate({
+                users
+            });
+        }
     }
 });

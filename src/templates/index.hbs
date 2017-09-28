@@ -22,7 +22,7 @@
   					<div class="part">
   						<div class="field field--ico">
   							<i class="ico i-search"></i>
-  							<input type="text" class='field__input filter-all-users' placeholder="{{filterPlaceholderLeft}}">
+  							<input type="text" class='field__input filter-all-users' placeholder="{{templateContent.filterPlaceholderLeft}}">
   						</div>
   					</div>
   					<div class="part">
@@ -35,32 +35,36 @@
   			<div class="f-filter__content">
   				<div class="grid">
   					<div class="part left-col">
-  						<h3 class="title">Ваши друзья</h3>
-  						<ul class="list">
-							{{> "./allFriend.hbs"}}
-  						</ul>
+              <div class="part__inner">
+    						<h3 class="title">Ваши друзья</h3>
+    						<ul class="list">
+  							{{> "./allFriend.hbs"}}
+  						  </ul>
+              </div>
   					</div>
   					<div class="part right-col">
-  						<h3 class="title">Друзья в списке</h3>
-  						<ul class="list">
-							{{#each usersAdd}}
-  							<li class="list__item">
-  								<div class="user" data-user-id="{{id}}" draggable="true">
-  									<div class="avatar">
-  										<div class="avatar__inner" style='background-image: url({{photo_100}})'></div>
-  									</div>
-  									<p class="user__name">{{first_name}} {{last_name}}</p>
-  									<i class="ico i-close remove-user"></i>
-  								</div>
-  							</li>
-							{{/each}}
-  						</ul>
+              <div class="part__inner">
+    						<h3 class="title">Друзья в списке</h3>
+    						<ul class="list">
+  							{{#each usersAdd}}
+    							<li class="list__item">
+    								<div class="user" data-user-id="{{id}}" draggable="true">
+    									<div class="avatar">
+    										<div class="avatar__inner" style='background-image: url({{photo_100}})'></div>
+    									</div>
+    									<p class="user__name">{{first_name}} {{last_name}}</p>
+    									<i class="ico i-close remove-user"></i>
+    								</div>
+    							</li>
+  							{{/each}}
+    						</ul>
+              </div>
   					</div>
   				</div>
   			</div>
   			<div class="f-filter__bottom">
   					<div class="button">
-  				    <button class="button__text">Сохранить</button>
+  				    <button class="button__text button--save">Сохранить</button>
   				  </div>
   			</div>
   		</div>
